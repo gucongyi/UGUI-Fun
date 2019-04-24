@@ -1,0 +1,14 @@
+UGUI 的InputField在安卓手机的输入框显示白色
+
+
+今天在使用Unity InputField组件输入时发现显示为白色就是看不到字体，查找一下发现是与android交互存在的问题，只需在ANdroidManifest.XML中Application位置下加上：
+
+android:theme=”@android:style/Theme.Holo.Light.DarkActionBar”即可。
+
+<application android:icon="@drawable/app_icon" android:label="@string/app_name" android:allowBackup="true" android:debuggable="true">
+    <activity android:label="@string/app_name" 
+	android:screenOrientation="portrait" 
+	android:launchMode="singleTask" 
+	android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
+	android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|fontScale" 
+	android:name="com.unity3d.player.UnityPlayerActivity">
