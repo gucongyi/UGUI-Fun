@@ -1,0 +1,59 @@
+    //输入字符串只包含(中文、英文、数字)
+    public static bool InputCharacterValid(string inputText)
+    {
+        var original = inputText;
+        //中文
+        string regex0 = ".*[\\u4e00-\\u9fa5].*";
+        //英文
+        string regex1 = ".*[a-zA-z].*";
+        //数字
+        string regex2 = ".*[0-9].*";
+
+        var now = Regex.Replace(original, "[a-z]", "", RegexOptions.IgnoreCase);
+        now = Regex.Replace(now, "[0-9]", "", RegexOptions.IgnoreCase);
+        if (Regex.IsMatch(now, @"[\u4e00-\u9fa5]"))
+        {
+            string retValue = string.Empty;
+            var strsStrings = now.ToCharArray();
+            for (int index = 0; index < strsStrings.Length; index++)
+            {
+                if (strsStrings[index] >= 0x4e00 && strsStrings[index] <= 0x9fa5)
+                {
+                    continue;
+                }
+                retValue += strsStrings[index];
+            }
+            now = retValue;
+        }
+        return string.IsNullOrEmpty(now);
+    }
+
+    public static void TextOverFlowLimitWidth(Text text, string textString)
+    {
+        float maxWidth = text.rectTransform.sizeDelta.x;
+        Vector2 textExtents = new Vector2();
+        var textGenerationSettings = text.GetGenerationSettings(textExtents);
+        var realWidth = text.cachedTextGeneratorForLayout.GetPreferredWidth(textString, textGenerationSettings);
+        if (realWidth < maxWidth)
+        {//没超过
+            text.text = textString;
+            return;
+        }
+        else
+        {
+            for (int i = 0; i < textString.Length; i++)
+            {
+                var subText = textString.Substring(0, i) + "...";
+                var width = text.cachedTextGeneratorForLayout.GetPreferredWidth(subText, textGenerationSettings);
+                if (width > maxWidth && i > 0)
+                {
+                    text.text = textString.Substring(0, i - 1) + "...";
+                    break;
+                }
+                if (width <= maxWidth && i == textString.Length - 1)
+                {
+                    text.text = textString;
+                }
+            }
+        }
+    }
