@@ -1,0 +1,13 @@
+public static void SetRectTransformStretchAllWithParent(this Transform trans, Transform parentTrans)
+    {
+        trans.SetParent(parentTrans);
+        RectTransform rectTrans = trans.GetComponent<RectTransform>();
+        rectTrans.anchorMin = Vector2.zero;
+        rectTrans.anchorMax = Vector2.one;
+        rectTrans.pivot=0.5f* Vector2.one;
+        rectTrans.offsetMin = Vector2.zero;
+        rectTrans.offsetMax = Vector2.zero;
+        trans.localEulerAngles = Vector3.zero;
+        trans.localScale = Vector3.one;
+        trans.gameObject.SetActive(true);
+    }
