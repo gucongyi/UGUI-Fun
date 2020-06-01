@@ -1,0 +1,4 @@
+Asset同级目录下有个Package,manifest.json的文件夹是根目录
+第一导入使用Unity->Window->Package Manager->+选中工程下的包名称
+"com.coffee.ui-particle": "file:../com.coffee.ui-particle-3.0.0-preview.11/package"
+使用相对目录必须带有file:
