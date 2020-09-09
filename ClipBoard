@@ -1,0 +1,2 @@
+GUIUtility.systemCopyBuffer = StaticData.Uid.ToString(); //将文字复制到剪贴板API
+api上写android和ios不能用，但实测是可以用
